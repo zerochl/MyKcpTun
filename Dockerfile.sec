@@ -1,10 +1,6 @@
-﻿FROM golang:1.5.1
+﻿FROM busybox
 
-MAINTAINER Sakeven "sakeven.jiang@daocloud.io"
+ADD go/bin/app /usr/bin/app
 
-# 将源码复制到 $GOPATH/src/app，$GOPATH 为 /go
-ADD . $GOPATH/src/app
-# 下载安装依赖
-RUN go get app
-# 静态编译安装，最终可执行文件为 /go/bin/app
-RUN CGO_ENABLED=0 go install -a app
+EXPOSE 80
+CMD /usr/bin/app
